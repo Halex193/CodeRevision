@@ -2,7 +2,6 @@
 #include "ui_statisticswindow.h"
 #include "CircleWidget.h"
 #include <vector>
-#include <QtWidgets/QLabel>
 
 using namespace std;
 
@@ -20,11 +19,12 @@ StatisticsWindow::StatisticsWindow(Controller &controller, QWidget *parent) :
         auto *circleWidget = new CircleWidget{programmer.getRevisedFiles(), finished};
         layout->addWidget(circleWidget);
         auto *label = new QLabel{programmer.getName()};
-        QFont font{"Times", 9};
+        QFont font{"Times", 18};
         label->setFont(font);
         layout->addWidget(label);
         ui->verticalLayout->addLayout(layout);
         circles.push_back(circleWidget);
+        labels.push_back(label);
     }
     controller.getRepository().attach(this);
     update();
@@ -43,6 +43,13 @@ void StatisticsWindow::update()
     {
         bool finished = (programmer.getRevisedFiles() >= programmer.getTotalFiles());
         circles[i]->updateData(programmer.getRevisedFiles(), finished);
+        if (finished)
+        {
+            QPalette qPalette{};
+            QColor color{"blue"};
+            qPalette.setColor(QPalette::Foreground, color);
+            labels[i]->setPalette(qPalette);
+        }
         i++;
     }
 }

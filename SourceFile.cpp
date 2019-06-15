@@ -52,7 +52,7 @@ bool SourceFile::operator!=(const SourceFile &rhs) const
 QString SourceFile::toQString()
 {
     QString formattedStatus = (status == "revised" ? "Revised":"Not Revised");
-    QString formattedReviewer = (reviewer.isEmpty()? "Not revised" : "Revised by: " + reviewer);
+    QString formattedReviewer = (reviewer.isEmpty()? "No reviewer" : "Revised by: " + reviewer);
     return name + " - " + formattedStatus + " - Created by: " + creator + " - " +formattedReviewer;
 }
 

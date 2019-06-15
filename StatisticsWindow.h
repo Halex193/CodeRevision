@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QLabel>
 #include "Controller.h"
 #include "CircleWidget.h"
 
@@ -16,6 +17,7 @@ class StatisticsWindow : public QWidget, public Observer
 Q_OBJECT
     Controller &controller;
     std::vector<CircleWidget*> circles;
+    std::vector<QLabel*> labels;
 public:
     explicit StatisticsWindow(Controller &controller, QWidget *parent = nullptr);
 
