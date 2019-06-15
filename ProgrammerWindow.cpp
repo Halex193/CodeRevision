@@ -73,7 +73,7 @@ void ProgrammerWindow::revisedButtonClicked()
         bool allRevised = controller.revise(selectedFile, programmerName);
         if (allRevised)
         {
-            QMessageBox::information(nullptr, "Hooray!", "You have revised all the files you had to!", QMessageBox::Ok);
+            QMessageBox::information(nullptr, "Congratulations!", "You have revised all the files you had to!", QMessageBox::Ok);
         }
     }
 }
@@ -81,7 +81,10 @@ void ProgrammerWindow::revisedButtonClicked()
 void ProgrammerWindow::setRevised(int revisedFiles, int totalFiles)
 {
     ui->revisedLabel->setText(QString{"Revised: "} + QString::number(revisedFiles));
-    ui->unrevisedLabel->setText(QString{"Unrevised: "} + QString::number((totalFiles - revisedFiles)));
+    int unrevised = totalFiles - revisedFiles;
+    if (unrevised < 0)
+        unrevised = 0;
+    ui->unrevisedLabel->setText(QString{"Unrevised: "} + QString::number(unrevised));
 }
 
 void ProgrammerWindow::selectedItemChanged()
