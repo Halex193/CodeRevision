@@ -7,6 +7,10 @@
 class SourceFile
 {
     QString name;
+public:
+    explicit SourceFile(const QString &name);
+
+private:
     QString status;
     QString creator;
     QString reviewer;

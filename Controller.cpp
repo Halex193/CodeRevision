@@ -12,7 +12,7 @@ void Controller::add(const QString &sourceFileName, const QString &programmerNam
 {
     if (sourceFileName.isEmpty())
     {
-        throw EmptyFileName{};
+        throw EmptyFileNameException{};
     }
     SourceFile sourceFile{sourceFileName, "not_revised", programmerName, ""};
     repository.add(sourceFile);

@@ -11,11 +11,12 @@ StatisticsWindow::StatisticsWindow(Controller &controller, QWidget *parent) :
         ui(new Ui::StatisticsWindow), controller(controller)
 {
     ui->setupUi(this);
+    setWindowTitle("Statistics");
     vector<Programmer> programmers = controller.getRepository().getProgrammers();
     for (auto &programmer : programmers)
     {
         auto *layout = new QHBoxLayout{};
-        bool finished = (programmer.getRevisedFiles() == programmer.getTotalFiles());
+        bool finished = (programmer.getRevisedFiles() >= programmer.getTotalFiles());
         auto *circleWidget = new CircleWidget{programmer.getRevisedFiles(), finished};
         layout->addWidget(circleWidget);
         auto *label = new QLabel{programmer.getName()};
@@ -40,7 +41,8 @@ void StatisticsWindow::update()
     int i=0;
     for (auto &programmer : programmers)
     {
-        circles[i]->update();
+        bool finished = (programmer.getRevisedFiles() >= programmer.getTotalFiles());
+        circles[i]->updateData(programmer.getRevisedFiles(), finished);
         i++;
     }
 }

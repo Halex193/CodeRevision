@@ -26,7 +26,7 @@ void Repository::readData()
         Programmer programmer{fields[0], fields[1].toInt(), fields[2].toInt()};
         programmers.push_back(programmer);
     }
-
+    file.close();
     QFile file2{sourceFilesFile};
     if (!file2.open(QIODevice::ReadOnly))
     {
@@ -42,6 +42,7 @@ void Repository::readData()
         SourceFile sourceFile{fields[0], fields[1], fields[2], fields[3]};
         sourceFiles.push_back(sourceFile);
     }
+    file2.close();
 }
 
 const std::vector<Programmer> &Repository::getProgrammers() const
@@ -59,7 +60,7 @@ void Repository::add(SourceFile &sourceFile)
     auto iterator = find(sourceFiles.begin(), sourceFiles.end(), sourceFile);
     if (iterator != sourceFiles.end())
     {
-        throw DuplicateFile{};
+        throw DuplicateFileException{};
     }
     sourceFiles.push_back(sourceFile);
     notify();
@@ -68,8 +69,9 @@ void Repository::add(SourceFile &sourceFile)
 void Repository::fileReviewed(SourceFile &sourceFile)
 {
     auto iterator = std::find(sourceFiles.begin(), sourceFiles.end(), sourceFile);
-//    sourceFiles.erase(iterator);
-//    sourceFiles.push_back(sourceFile);
+    sourceFile.setCreator((*iterator).getCreator());
+    //    sourceFiles.erase(iterator);
+    //    sourceFiles.push_back(sourceFile);
     *iterator = sourceFile;
 }
 

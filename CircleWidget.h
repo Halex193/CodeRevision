@@ -17,7 +17,7 @@ protected:
     void paintEvent(QPaintEvent *event) override;
 
 public:
-    void updateData();
+    void updateData(int newNumber, bool newFinished);
 };
 
 #endif // CircleWidget_H

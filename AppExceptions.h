@@ -9,17 +9,17 @@ public:
     {}
 };
 
-class EmptyFileName : public AppException
+class EmptyFileNameException : public AppException
 {
 public:
-    explicit EmptyFileName() : AppException("The file name is empty!")
+    explicit EmptyFileNameException() : AppException("The file name is empty!")
     {}
 };
 
-class DuplicateFile : public AppException
+class DuplicateFileException : public AppException
 {
 public:
-    explicit DuplicateFile() : AppException("The file already exists!")
+    explicit DuplicateFileException() : AppException("The file already exists!")
     {}
 };
 #endif //CODEREVISION_APPEXCEPTIONS_H
