@@ -70,8 +70,6 @@ void Repository::fileReviewed(SourceFile &sourceFile)
 {
     auto iterator = std::find(sourceFiles.begin(), sourceFiles.end(), sourceFile);
     sourceFile.setCreator((*iterator).getCreator());
-    //    sourceFiles.erase(iterator);
-    //    sourceFiles.push_back(sourceFile);
     *iterator = sourceFile;
 }
 
@@ -81,8 +79,6 @@ bool Repository::programmerMadeReview(const QString& programmerName)
     auto iterator = std::find(programmers.begin(), programmers.end(), programmer);
     programmer.setRevisedFiles((*iterator).getRevisedFiles() + 1);
     programmer.setTotalFiles((*iterator).getTotalFiles());
-//    programmers.erase(iterator);
-//    programmers.push_back(programmer);
     *iterator = programmer;
     notify();
     return programmer.getRevisedFiles() == programmer.getTotalFiles();
